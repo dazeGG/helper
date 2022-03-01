@@ -17,9 +17,9 @@ def _load_keys() -> (PublicKey, PrivateKey):
     return _public_key, _private_key
 
 
-def _encrypt(_text: str, _key: PublicKey | PrivateKey) -> bytes:
+def _encrypt(_text: str, _key: PublicKey) -> bytes:
     return encrypt(_text.encode('ascii'), _key)
 
 
-def _decrypt(_crypted_text: bytes, _key: PublicKey | PrivateKey) -> str | bool:
+def _decrypt(_crypted_text: bytes, _key: PrivateKey) -> str | bool:
     return decrypt(_crypted_text, _key).decode('ascii')
