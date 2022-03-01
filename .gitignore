@@ -1,4 +1,6 @@
 # ignoring config for security purposes
 config/
+# ignoring keys_changer for security purposes
+bot/keys_changer.py
 # ignore .idea/...
 .idea/
