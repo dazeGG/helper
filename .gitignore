@@ -1,4 +1,4 @@
 # ignoring config for security purposes
-# config/bot.ini
+config/bot.ini
 # ignore .idea/...
 .idea/
