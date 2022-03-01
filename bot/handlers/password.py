@@ -32,7 +32,7 @@ class Group(StatesGroup):
 
 async def _passwords(call: types.CallbackQuery):
     data = call.data.split('_')
-    print(data)
+    # print(data)
     match len(data):
         case 1:
             await call.message.edit_text(
@@ -66,7 +66,7 @@ async def _passwords(call: types.CallbackQuery):
 async def show_group(call: types.CallbackQuery):
     public_key, private_key = _load_keys()
     data = call.data.split('_')
-    print(data)
+    # print(data)
     match data[3]:
         case 'back':
             await call.message.edit_text(
@@ -96,7 +96,7 @@ async def show_group(call: types.CallbackQuery):
 async def show_password(call: types.CallbackQuery):
     public_key, private_key = _load_keys()
     data = call.data.split('_')
-    print(data)
+    # print(data)
     if data[2] == 'generation':
         match data[3]:
             case 'another':

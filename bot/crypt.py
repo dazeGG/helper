@@ -2,7 +2,7 @@ from rsa import newkeys, encrypt, decrypt, PrivateKey, PublicKey
 
 
 def _generate_keys():
-    (_public_key, _private_key) = newkeys(1024)
+    (_public_key, _private_key) = newkeys(4096)
     with open('config/keys/public_key.pem', 'wb') as file:
         file.write(_public_key.save_pkcs1('PEM'))
     with open('config/keys/private_key.pem', 'wb') as file:

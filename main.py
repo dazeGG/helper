@@ -7,6 +7,9 @@ from aiogram import Bot, Dispatcher, types
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 
 from bot.config_reader import load_config
+
+from bot.crypto_keys_changer import crypto_keys_changer
+
 from bot.handlers.common import rh_common
 # from bot.handlers.settings import rh_settings
 from bot.handlers.password import rh_passwords
@@ -37,6 +40,8 @@ def log():
 
 async def main():
     log()
+
+    await crypto_keys_changer()
 
     rh_common(dp)
     # rh_settings(dp)
