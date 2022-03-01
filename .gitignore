@@ -1,1 +1,4 @@
+# ignoring config for security purposes
 config/
+# ignore .idea/...
+.idea/
