@@ -1,11 +1,5 @@
-from pymongo import MongoClient
 from aiogram import types
-
-from bot.config_reader import load_config
-
-
-cluster = MongoClient(load_config("config/bot.ini").helper_bot.cluster_link)
-collection = cluster['test']['users']
+from bot.config import collection
 
 
 ''' START '''

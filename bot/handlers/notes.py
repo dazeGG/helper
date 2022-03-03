@@ -1,4 +1,3 @@
-from pymongo import MongoClient
 # from pymongo.errors import DuplicateKeyError
 
 from aiogram import Dispatcher, types
@@ -7,11 +6,10 @@ from aiogram.dispatcher.filters import Text
 from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram.utils.exceptions import MessageNotModified
 
-from bot.config_reader import load_config
+from bot.config import collection
+
 import bot.keyboards as k
 
-cluster = MongoClient(load_config("config/bot.ini").helper_bot.cluster_link)
-collection = cluster['test']['users']
 
 choose = 'заметку'
 

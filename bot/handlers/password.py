@@ -1,19 +1,14 @@
-from pymongo import MongoClient
-
 from aiogram import Dispatcher, types
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import Text
 from aiogram.dispatcher.filters.state import State, StatesGroup
-from aiogram.utils.exceptions import MessageNotModified
+from aiogram.utils.exceptions import MessageNotModified, MessageCantBeDeleted
+
+from bot.config import collection
 
 from bot.crypt import _load_keys, _encrypt, _decrypt
-from bot.config_reader import load_config
 import bot.keyboards as k
 import bot.scripts as sc
-
-
-cluster = MongoClient(load_config("config/bot.ini").helper_bot.cluster_link)
-collection = cluster['test']['users']
 
 choose_group = 'Выбери группу паролей.'
 choose_password = 'Выбери пароль.'
@@ -47,7 +42,10 @@ async def _passwords(call: types.CallbackQuery):
                         reply_markup=k.start()
                     )
                 case 'add':
-                    await call.message.delete()
+                    try:
+                        await call.message.delete()
+                    except MessageCantBeDeleted:
+                        await call.message.edit_text('Сообщение не может быть удалено, поэтому делаю так)')
                     await call.message.answer(
                         text='Напиши название группы.',
                         reply_markup=types.ReplyKeyboardMarkup(resize_keyboard=True).add(*['отмена'])
@@ -76,7 +74,10 @@ async def show_group(call: types.CallbackQuery):
             collection.update_one({'_id': call.message.chat.id},
                                   {'$set': {'tmp': {'tmp-password-title': '', 'chosen-group': ''}}})
         case 'add':
-            await call.message.delete()
+            try:
+                await call.message.delete()
+            except MessageCantBeDeleted:
+                await call.message.edit_text('Сообщение не может быть удалено, поэтому делаю так)')
             await call.message.answer(
                 'Напиши ключ для пароля.',
                 reply_markup=types.ReplyKeyboardMarkup(resize_keyboard=True).add(*['отмена'])

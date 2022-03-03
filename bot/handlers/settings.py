@@ -1,14 +1,9 @@
-from pymongo import MongoClient
-
 from aiogram import Dispatcher, types
 from aiogram.dispatcher.filters import Text
 
-from bot.config_reader import load_config
+from bot.config import collection
+
 import bot.keyboards as k
-
-
-cluster = MongoClient(load_config("config/bot.ini").helper_bot.cluster_link)
-collection = cluster['test']['users']
 
 
 def get_generation_settings(user_id: int):

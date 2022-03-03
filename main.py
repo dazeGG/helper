@@ -1,12 +1,10 @@
 import logging
 from asyncio import run
 
-from pymongo import MongoClient
-
 from aiogram import Bot, Dispatcher, types
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 
-from bot.config_reader import load_config
+from bot.config import config
 
 from bot.crypto_keys_changer import crypto_keys_changer
 
@@ -15,14 +13,8 @@ from bot.handlers.common import rh_common
 from bot.handlers.password import rh_passwords
 
 
-config = load_config("config/bot.ini")
-
 bot = Bot(token=config.helper_bot.token, parse_mode=types.ParseMode.HTML)
 dp = Dispatcher(bot=bot, storage=MemoryStorage())
-
-
-cluster = MongoClient(config.helper_bot.cluster_link)
-collection = cluster['test']['users']
 
 
 async def set_commands():
